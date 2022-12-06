@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameCtrl : MonoBehaviour
+public class GameCtrl : NghiaMonoBehaviour
 {
     private static GameCtrl instance;
     public static GameCtrl Instance
@@ -20,12 +20,7 @@ public class GameCtrl : MonoBehaviour
     private FloatingJoystick joyStick;
     public FloatingJoystick Joystick { get { return joyStick; } }
 
-    private void Reset()
-    {
-        LoadComponent();
-    }
-
-    private void LoadComponent()
+    protected override void LoadComponent()
     {
         joyStick = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
     }

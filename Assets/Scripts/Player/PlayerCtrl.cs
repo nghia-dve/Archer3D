@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : NghiaMonoBehaviour
 {
     private static PlayerCtrl instance;
     public static PlayerCtrl Instance
@@ -22,14 +22,10 @@ public class PlayerCtrl : MonoBehaviour
     private GameObject model;
     public GameObject Model { get { return model; } }
 
-    private void Reset()
+    protected override void LoadComponent()
     {
-        LoadComponent();
-    }
-    private void LoadComponent()
-    {
-        animator = GameObject.Find("Model").GetComponent<Animator>();
-        model = GameObject.Find("Model");
+        animator = GameObject.Find("ModelAnim").GetComponent<Animator>();
+        model = GameObject.Find("ModelAnim");
 
     }
 

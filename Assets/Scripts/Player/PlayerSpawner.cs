@@ -10,23 +10,10 @@ public class PlayerSpawner : Spawner
     [SerializeField]
     private string playerPath;
 
-    private void Reset()
-    {
-        ResetValue();
-    }
     private void Awake()
     {
         PlayerSpawn();
     }
-    private void Start()
-    {
-
-    }
-    private void Update()
-    {
-
-    }
-
     private void PlayerSpawn()
     {
         GameObject newGameObject = Spawn(playerPath, pos, Quaternion.identity);
@@ -34,7 +21,7 @@ public class PlayerSpawner : Spawner
         StartCoroutine(ResetAminator());
     }
 
-    private void ResetValue()
+    protected override void ResetValue()
     {
         pos = Vector3.zero;
         playerPath = "Player/PlayerBasic";
@@ -43,13 +30,9 @@ public class PlayerSpawner : Spawner
     public IEnumerator ResetAminator()
     {
         GameObject gameObject = PlayerCtrl.Instance.Model;
-        //PlayerCtrl.Instance.Animator.enabled = false;
+
         gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.00f);
         gameObject.SetActive(true);
-        // PlayerCtrl.Instance.Animator.enabled = true;
     }
-
-
-
 }

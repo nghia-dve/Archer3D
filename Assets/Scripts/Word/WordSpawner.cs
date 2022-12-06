@@ -13,10 +13,6 @@ public class WordSpawner : Spawner
     [SerializeField]
     private int numberSpawn;
 
-    private void Reset()
-    {
-        ResetValue();
-    }
     private void Awake()
     {
         WordSpawn();
@@ -32,7 +28,7 @@ public class WordSpawner : Spawner
         }
     }
 
-    private void ResetValue()
+    protected override void ResetValue()
     {
         pos = Vector3.zero;
         groundPath = "Word/Ground";

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Spawner : MonoBehaviour
+public abstract class Spawner : NghiaMonoBehaviour
 {
 
     //private List<GameObject> gameObjects = new List<GameObject>();
