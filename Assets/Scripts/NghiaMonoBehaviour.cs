@@ -32,6 +32,10 @@ public abstract class NghiaMonoBehaviour : MonoBehaviour
         jobHandle.Complete();
         transformAccessArray.Dispose();
     }
+    protected void JobsMove(NativeArray<float> moveYArray)
+    {
+
+    }
     [BurstCompile]
     protected struct ReallyToughParallelJobTransforms : IJobParallelForTransform
     {
