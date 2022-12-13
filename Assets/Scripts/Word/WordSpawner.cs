@@ -5,24 +5,18 @@ using UnityEngine;
 public class WordSpawner : Spawner
 {
     [SerializeField]
-    private Vector3 pos;
-
-    [SerializeField]
-    private string groundPath;
-
-    [SerializeField]
     private int numberSpawn;
-
-    private void Awake()
+    protected override void Start()
     {
-        WordSpawn();
+        base.Start();
+        GroundSpawn();
     }
 
-    private void WordSpawn()
+    private void GroundSpawn()
     {
         for (int i = 0; i < numberSpawn; i++)
         {
-            GameObject newGameObject = Spawn(groundPath, pos, Quaternion.identity);
+            GameObject newGameObject = Spawn(prefab, pos, Quaternion.identity);
             newGameObject.transform.parent = transform;
             pos += new Vector3(0, 0, 20);
         }
@@ -30,8 +24,11 @@ public class WordSpawner : Spawner
 
     protected override void ResetValue()
     {
+        base.ResetValue();
         pos = Vector3.zero;
-        groundPath = "Word/Ground";
+        prefabName = "Ground";
         numberSpawn = 3;
     }
+
+
 }

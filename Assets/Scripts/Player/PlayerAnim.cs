@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class PlayerAnim : NghiaMonoBehaviour
 {
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private PlayerCtrl playerCtrl;
+
     private string currentState;
 
-    //private bool isRun;
+    public string CurrentState { get { return currentState; } }
+
+    protected bool isRun;
+    public bool IsRun { get { return isRun; } }
 
     const string animRun = "NormalRun_noWeapon";
     const string animIdle = "Idle_noWeapon";
@@ -17,40 +24,46 @@ public class PlayerAnim : NghiaMonoBehaviour
 
     private void Update()
     {
-
         Run();
+        CheckRun();
         Attack();
+        //RestCombo();
+
     }
 
-    private bool IsRun()
+    private void CheckRun()
     {
-        if (InputManager.Instance.JoyStickDirection.magnitude > 0) return false;
-        return true;
+        isRun = false;
+        if (InputManager.Instance.JoyStickDirection.magnitude > 0) return;
+        isRun = true;
     }
 
     private void Run()
     {
-        if (!IsRun()) return;
-        ChangeAnimationState(animRun);
+        if (isRun) return;
+        ChangeCurrentState(animRun);
     }
     private void Attack()
     {
-        if (IsRun()) return;
-        ChangeAnimationState(animAttack);
+        if (!isRun) return;
+        ChangeCurrentState(animAttack);
     }
 
-    #region Even animatoin
-    private void EvenRestCombo()
+
+    protected void RestCombo()
     {
-        ChangeAnimationState(animAttack);
-    }
-    #endregion
+        //if (!playerCtrl.IsRestCombo) return;
+        ChangeCurrentState(animAttack);
+        currentState = "";
 
-    private void ChangeAnimationState(string newState)
+    }
+
+
+    private void ChangeCurrentState(string newState)
     {
         if (currentState == newState) return;
 
-        animator.Play(currentState);
+        animator.Play(newState);
 
         currentState = newState;
     }

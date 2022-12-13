@@ -4,29 +4,17 @@ using UnityEngine;
 
 public class PlayerCtrl : NghiaMonoBehaviour
 {
-    private static PlayerCtrl instance;
-    public static PlayerCtrl Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = FindObjectOfType<PlayerCtrl>();
-            return instance;
-        }
-    }
-    [SerializeField]
-    private Animator animator;
-    public Animator Animator { get { return animator; } }
+    protected bool isRestCombo;
+    public bool IsRestCombo { get { return isRestCombo; } }
 
     [SerializeField]
-    private GameObject model;
-    public GameObject Model { get { return model; } }
-
-    protected override void LoadComponent()
+    private PlayerAnim playerAnim;
+    public PlayerAnim PlayerAnim { get { return playerAnim; } }
+    #region Even animatoin
+    protected void EvenRestCombo()
     {
-        animator = GameObject.Find("ModelAnim").GetComponent<Animator>();
-        model = GameObject.Find("ModelAnim");
+        isRestCombo = !isRestCombo;
 
     }
-
+    #endregion
 }

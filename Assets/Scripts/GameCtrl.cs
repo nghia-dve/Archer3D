@@ -20,8 +20,43 @@ public class GameCtrl : NghiaMonoBehaviour
     private FloatingJoystick joyStick;
     public FloatingJoystick Joystick { get { return joyStick; } }
 
+    [Header("path")]
+    [SerializeField]
+    private string EnemyPath;
+    [SerializeField]
+    private string playerPath;
+    [SerializeField]
+    private string wordPath;
+
+    private List<LoadPrefab> listModelPrefabs = new List<LoadPrefab>();
+    public List<LoadPrefab> ListModelPrefabs { get { return listModelPrefabs; } }
+
+    private void Awake()
+    {
+        listModelPrefabs.Clear();
+        GetListPrefabByName(listModelPrefabs, playerPath);
+        GetListPrefabByName(listModelPrefabs, EnemyPath);
+        GetListPrefabByName(listModelPrefabs, wordPath);
+    }
+
+    protected virtual void GetListPrefabByName(List<LoadPrefab> listFrefab, string pathFrefab)
+    {
+        var list = Resources.LoadAll(pathFrefab);
+        foreach (var item in list)
+        {
+            listFrefab.Add((LoadPrefab)item);
+        }
+    }
     protected override void LoadComponent()
     {
         joyStick = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        EnemyPath = "Enemy";
+        playerPath = "Player";
+        wordPath = "Word/Ground";
+    }
+
 }

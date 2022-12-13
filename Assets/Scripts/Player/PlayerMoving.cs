@@ -17,19 +17,18 @@ public class PlayerMoving : MonoBehaviour
 
     private void Update()
     {
-        //SetRigidbody();
         GetTagetDir();
+        ClampPos();
+        if (movingDir.magnitude < 0.01f) return;
         Move();
-    }
-    private void FixedUpdate()
-    {
-        //SetRigidbody();
+        LookAtTaget();
+
     }
 
-    //private void SetRigidbody()
-    //{
-    //    transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
-    //}
+    private void ResetPhysic()
+    {
+
+    }
 
     private void GetTagetDir()
     {
@@ -38,10 +37,17 @@ public class PlayerMoving : MonoBehaviour
 
     private void Move()
     {
-        if (movingDir.magnitude < 0.01f) return;
         transform.parent.position += movingDir * moveSpeedPlayer * Time.deltaTime;
+    }
+
+    private void LookAtTaget()
+    {
         transform.parent.rotation = Quaternion.LookRotation(movingDir);
+    }
+
+    private void ClampPos()
+    {
         transform.parent.position = new Vector3(Mathf.Clamp(transform.parent.position.x, -clampX, clampX),
-            Mathf.Clamp(transform.position.y, 0, 0), Mathf.Clamp(transform.parent.position.z, -clampZ, clampZ));
+    Mathf.Clamp(transform.position.y, 0, 0), Mathf.Clamp(transform.parent.position.z, -clampZ, clampZ));
     }
 }
