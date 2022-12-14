@@ -13,19 +13,17 @@ public class EnemySpawner : Spawner
 
     private List<GameObject> listEnemy = new List<GameObject>();
 
-    protected override void Start()
+    public bool Tes;
+
+    protected void Start()
     {
-        base.Start();
         PlayerSpawn();
     }
     private void PlayerSpawn()
     {
-        GameObject newGameObject = Spawn(prefab, pos, Quaternion.identity);
+        GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;
         listEnemy.Add(newGameObject);
-
-        //transformAccessArray.Add(newGameObject.transform);
-        //StartCoroutine(ResetAminator());
     }
 
     private void Update()
@@ -34,27 +32,22 @@ public class EnemySpawner : Spawner
         {
             for (int i = 0; i < 1; i++)
             {
-                pos = new Vector3(UnityEngine.Random.Range(-randomX, randomX), pos.y, UnityEngine.Random.Range(-randomZ, randomZ));
+                pos = new Vector3(UnityEngine.Random.Range(-randomX, randomX),
+                    pos.y, UnityEngine.Random.Range(-randomZ, randomZ));
                 PlayerSpawn();
             }
         }
-        Jobs(listEnemy, transformAccessArray);
+        Jobs(listEnemy, transformAccessArray, InputManager.Instance.JoyStickDirection, Tes);
 
     }
-    //public IEnumerator ResetAminator()
-    //{
-    //    GameObject gameObject = EnemyCtrl.Instance.Model;
-
-    //    gameObject.SetActive(false);
-    //    yield return new WaitForSeconds(0.00f);
-    //    gameObject.SetActive(true);
-    //}
 
     protected override void ResetValue()
     {
         base.ResetValue();
         pos = Vector3.zero;
         prefabName = "BatPBR";
+        randomX = 4;
+        randomZ = 14;
 
     }
 }

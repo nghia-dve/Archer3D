@@ -28,15 +28,15 @@ public class GameCtrl : NghiaMonoBehaviour
     [SerializeField]
     private string wordPath;
 
-    private List<LoadPrefab> listModelPrefabs = new List<LoadPrefab>();
-    public List<LoadPrefab> ListModelPrefabs { get { return listModelPrefabs; } }
+    private List<LoadPrefab> listPrefabs = new List<LoadPrefab>();
+    public List<LoadPrefab> ListPrefabs { get { return listPrefabs; } }
 
     private void Awake()
     {
-        listModelPrefabs.Clear();
-        GetListPrefabByName(listModelPrefabs, playerPath);
-        GetListPrefabByName(listModelPrefabs, EnemyPath);
-        GetListPrefabByName(listModelPrefabs, wordPath);
+        listPrefabs.Clear();
+        GetListPrefabByName(listPrefabs, playerPath);
+        GetListPrefabByName(listPrefabs, EnemyPath);
+        GetListPrefabByName(listPrefabs, wordPath);
     }
 
     protected virtual void GetListPrefabByName(List<LoadPrefab> listFrefab, string pathFrefab)

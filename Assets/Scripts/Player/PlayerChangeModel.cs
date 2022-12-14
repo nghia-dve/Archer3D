@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerChangeModel : Spawner
+public class PlayerChangeModel : NghiaMonoBehaviour
 {
     [SerializeField]
     private PlayerCtrl playerCtrl;
-
     private string currentState;
+    public string CurrentState { get { return currentState; } }
 
     private void Update()
     {
@@ -17,13 +17,12 @@ public class PlayerChangeModel : Spawner
     private void SendModel(string newState)
     {
         if (currentState == newState || newState == null) return;
-        prefabName = newState;
         currentState = newState;
-        GetPrefabByName();
-        GameObject newGameObject = Spawn(prefab, pos, Quaternion.identity);
+        //GetPrefabByName();
+        GameObject newGameObject = ModelPlayerSpawner.Instance.Spawn(newState, Vector3.zero, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;
         newGameObject.transform.SetAsFirstSibling();
-        newGameObject.transform.localPosition = pos;
+        newGameObject.transform.localPosition = Vector3.zero;
         newGameObject.transform.localRotation = Quaternion.identity;
         //GameCtrl.Instance.ReceiveData(transform.parent.gameObject, transform.parent.GetComponent<Animator>(), currentState);
         ResetAminator();

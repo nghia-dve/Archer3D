@@ -12,7 +12,6 @@ public class PlayerAnim : NghiaMonoBehaviour
     private PlayerCtrl playerCtrl;
 
     private string currentState;
-
     public string CurrentState { get { return currentState; } }
 
     protected bool isRun;
@@ -61,6 +60,7 @@ public class PlayerAnim : NghiaMonoBehaviour
 
     private void ChangeCurrentState(string newState)
     {
+
         if (currentState == newState) return;
 
         animator.Play(newState);
@@ -70,5 +70,7 @@ public class PlayerAnim : NghiaMonoBehaviour
     protected override void LoadComponent()
     {
         animator = GetComponent<Animator>();
+        playerCtrl = GetComponent<PlayerCtrl>();
+
     }
 }

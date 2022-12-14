@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class PlayerSpawner : Spawner
 {
-
-    protected override void Start()
+    private static PlayerSpawner instance;
+    public static PlayerSpawner Instance
     {
-        base.Start();
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<PlayerSpawner>();
+            return instance;
+        }
+    }
+    protected void Start()
+    {
         PlayerSpawn();
     }
     private void PlayerSpawn()
     {
-        GameObject newGameObject = Spawn(prefab, pos, Quaternion.identity);
+        GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;
 
         // StartCoroutine(ResetAminator());

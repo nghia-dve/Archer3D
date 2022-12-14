@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf876d92549186c44aa0f8e500e3443c, type: 3}
   m_Name: Combo01_SingleTwohandSword
   m_EditorClassIdentifier: 
-  model: {fileID: 5802967570986924165, guid: 7605a0db2743c73488ef1b674543fcd3, type: 3}
+  model: {fileID: 5473323829878873202, guid: 7605a0db2743c73488ef1b674543fcd3, type: 3}

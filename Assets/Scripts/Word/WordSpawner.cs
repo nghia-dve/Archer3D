@@ -6,9 +6,8 @@ public class WordSpawner : Spawner
 {
     [SerializeField]
     private int numberSpawn;
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         GroundSpawn();
     }
 
@@ -16,7 +15,7 @@ public class WordSpawner : Spawner
     {
         for (int i = 0; i < numberSpawn; i++)
         {
-            GameObject newGameObject = Spawn(prefab, pos, Quaternion.identity);
+            GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
             newGameObject.transform.parent = transform;
             pos += new Vector3(0, 0, 20);
         }
