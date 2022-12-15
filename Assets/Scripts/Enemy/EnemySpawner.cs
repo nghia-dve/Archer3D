@@ -13,7 +13,7 @@ public class EnemySpawner : Spawner
 
     private List<GameObject> listEnemy = new List<GameObject>();
 
-    public bool Tes;
+    //public bool Tes;
 
     protected void Start()
     {
@@ -37,7 +37,7 @@ public class EnemySpawner : Spawner
                 PlayerSpawn();
             }
         }
-        Jobs(listEnemy, transformAccessArray, InputManager.Instance.JoyStickDirection, Tes);
+        //Jobs(listEnemy, transformAccessArray, InputManager.Instance.JoyStickDirection, Tes);
 
     }
 

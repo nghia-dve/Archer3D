@@ -21,6 +21,7 @@ public class PlayerAnim : NghiaMonoBehaviour
     const string animIdle = "Idle_noWeapon";
     const string animAttack = "Combo01_SingleTwohandSword";
 
+
     private void Update()
     {
         Run();
@@ -52,8 +53,9 @@ public class PlayerAnim : NghiaMonoBehaviour
     protected void RestCombo()
     {
         //if (!playerCtrl.IsRestCombo) return;
-        ChangeCurrentState(animAttack);
-        currentState = "";
+
+        //ChangeCurrentState(animAttack);
+        //currentState = "";
 
     }
 
@@ -63,7 +65,8 @@ public class PlayerAnim : NghiaMonoBehaviour
 
         if (currentState == newState) return;
 
-        animator.Play(newState);
+        //animator.Play(newState);
+        animator.SetTrigger(newState);
 
         currentState = newState;
     }

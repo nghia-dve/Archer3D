@@ -31,7 +31,8 @@ public class PlayerChangeModel : NghiaMonoBehaviour
     {
         Animator animator = playerCtrl.GetComponent<Animator>();
         animator.Rebind();
-        animator.Play(currentState);
+        //animator.Play(currentState);
+        animator.SetTrigger(currentState);
     }
 
     protected override void LoadComponent()
