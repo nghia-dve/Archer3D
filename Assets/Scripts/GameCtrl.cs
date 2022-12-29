@@ -15,11 +15,6 @@ public class GameCtrl : NghiaMonoBehaviour
         }
     }
 
-    [Header("==joystick==")]
-    [SerializeField]
-    private FloatingJoystick joyStick;
-    public FloatingJoystick Joystick { get { return joyStick; } }
-
     [Header("path")]
     [SerializeField]
     private string EnemyPath;
@@ -27,6 +22,9 @@ public class GameCtrl : NghiaMonoBehaviour
     private string playerPath;
     [SerializeField]
     private string wordPath;
+
+    private bool isAttack;
+    public bool IsAttack { get { return isAttack; } }
 
     private List<LoadPrefab> listPrefabs = new List<LoadPrefab>();
     public List<LoadPrefab> ListPrefabs { get { return listPrefabs; } }
@@ -47,10 +45,6 @@ public class GameCtrl : NghiaMonoBehaviour
             listFrefab.Add((LoadPrefab)item);
         }
     }
-    protected override void LoadComponent()
-    {
-        joyStick = GameObject.Find("Floating Joystick").GetComponent<FloatingJoystick>();
-    }
     protected override void ResetValue()
     {
         base.ResetValue();
@@ -59,4 +53,13 @@ public class GameCtrl : NghiaMonoBehaviour
         wordPath = "Word/Ground";
     }
 
+    public void Attack()
+    {
+        isAttack = true;
+    }
+
+    public void NotAttack()
+    {
+        isAttack = false;
+    }
 }

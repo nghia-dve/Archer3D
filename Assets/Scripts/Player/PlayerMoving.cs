@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoving : MonoBehaviour
+public class PlayerMoving : NghiaMonoBehaviour
 {
     private Vector3 movingDir;
 
@@ -15,11 +15,14 @@ public class PlayerMoving : MonoBehaviour
     [SerializeField]
     private float moveSpeedPlayer = 3;
 
+    [SerializeField]
+    private PlayerCtrl playerCtrl;
+
     private void Update()
     {
         GetTagetDir();
         ClampPos();
-        if (movingDir.magnitude < 0.01f) return;
+        if (movingDir.magnitude < 0.1f || playerCtrl.PlayerAnim.IsAttack || !playerCtrl.PlayerAnim.IsExitState) return;
         Move();
         LookAtTaget();
 
@@ -32,7 +35,7 @@ public class PlayerMoving : MonoBehaviour
 
     private void GetTagetDir()
     {
-        movingDir = InputManager.Instance.JoyStickDirection;
+        movingDir = InputManager.Instance.Direction;
     }
 
     private void Move()
@@ -49,5 +52,10 @@ public class PlayerMoving : MonoBehaviour
     {
         transform.parent.position = new Vector3(Mathf.Clamp(transform.parent.position.x, -clampX, clampX),
     Mathf.Clamp(transform.position.y, 0, 0), Mathf.Clamp(transform.parent.position.z, -clampZ, clampZ));
+    }
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
     }
 }

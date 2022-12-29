@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : NghiaMonoBehaviour
 {
     private static InputManager instance;
     public static InputManager Instance
@@ -14,17 +14,20 @@ public class InputManager : MonoBehaviour
             return instance;
         }
     }
-
-    private Vector3 joyStickDirection;
-    public Vector3 JoyStickDirection { get { return joyStickDirection; } }
+    private Vector3 direction;
+    public Vector3 Direction { get { return direction; } }
 
     private void FixedUpdate()
     {
-        _GetJoyStickDir();
+        GetDir();
     }
 
-    private void _GetJoyStickDir()
+    private void GetDir()
     {
-        joyStickDirection = new Vector3(GameCtrl.Instance.Joystick.Horizontal, 0, GameCtrl.Instance.Joystick.Vertical);
+#if UNITY_ANDROID
+        direction = new Vector3(UIManager.Instance.Joystick.Horizontal, 0, UIManager.Instance.Joystick.Vertical);
+#endif
+        direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
     }
+
 }
