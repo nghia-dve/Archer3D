@@ -26,15 +26,15 @@ public class PlayerAnim : NghiaMonoBehaviour
     public bool IsExitState { get { return isExitState; } }
 
     const string animRun = "Run";
-    const string animIdle = "Idle";
+    const string animMove = "Move";
     const string animSingleTwohandSwordAttack = "Sword_L";
 
     private void Start()
     {
-        // add even UI button down and up
         AddEvenButton();
     }
 
+    // add even UI button down and up
     private void AddEvenButton()
     {
         EventTrigger eventTrigger = UIManager.Instance.ButtonAttack.GetComponent<EventTrigger>();
@@ -48,45 +48,25 @@ public class PlayerAnim : NghiaMonoBehaviour
         eventTrigger.triggers.Add(entry);
     }
 
-
     private void Update()
     {
-        CheckRun();
         Run();
         SingleTwohandSwordAttack();
-        Idle();
-        //RestCombo();
-
-    }
-
-    private void CheckRun()
-    {
-        isRun = false;
-        if (InputManager.Instance.Direction.magnitude > 0.1f) return;
-        isRun = true;
     }
 
     private void Run()
     {
-        if (isRun) return;
         if (isAttack || !isExitState) return;
         ChangeCurrentState(animRun);
+        if (Mathf.Abs(InputManager.Instance.Direction.magnitude) == 0) return;
+        animator.SetFloat(animMove, Mathf.Abs(InputManager.Instance.Direction.magnitude));
 
     }
     private void SingleTwohandSwordAttack()
     {
-        //if (!isRun) return;
         if (!isAttack) return;
         ChangeCurrentState(animSingleTwohandSwordAttack);
         isExitState = false;
-
-    }
-    private void Idle()
-    {
-        if (!isRun) return;
-        if (isAttack || !isExitState) return;
-        ChangeCurrentState(animIdle);
-
     }
 
     private void ChangeModelWeapon(List<GameObject> listGameObjects, string name, int n)

@@ -6,11 +6,9 @@ public class PlayerMoving : NghiaMonoBehaviour
 {
     private Vector3 movingDir;
 
-    [SerializeField]
     private float clampX = 4;
 
-    [SerializeField]
-    private float clampZ = 14f;
+    private float clampZ = 40f;
 
     [SerializeField]
     private float moveSpeedPlayer = 3;
@@ -21,10 +19,13 @@ public class PlayerMoving : NghiaMonoBehaviour
     private void Update()
     {
         GetTagetDir();
-        ClampPos();
-        if (movingDir.magnitude < 0.1f || playerCtrl.PlayerAnim.IsAttack || !playerCtrl.PlayerAnim.IsExitState) return;
+        if (movingDir.magnitude <= 0.1f || playerCtrl.PlayerAnim.IsAttack || !playerCtrl.PlayerAnim.IsExitState) return;
         Move();
         LookAtTaget();
+
+    }
+    private void FixedUpdate()
+    {
 
     }
 
@@ -41,6 +42,7 @@ public class PlayerMoving : NghiaMonoBehaviour
     private void Move()
     {
         transform.parent.position += movingDir * moveSpeedPlayer * Time.deltaTime;
+        ClampPos();
     }
 
     private void LookAtTaget()
@@ -51,7 +53,7 @@ public class PlayerMoving : NghiaMonoBehaviour
     private void ClampPos()
     {
         transform.parent.position = new Vector3(Mathf.Clamp(transform.parent.position.x, -clampX, clampX),
-    Mathf.Clamp(transform.position.y, 0, 0), Mathf.Clamp(transform.parent.position.z, -clampZ, clampZ));
+    Mathf.Clamp(transform.position.y, 0, 0), Mathf.Clamp(transform.parent.position.z, 0, clampZ));
     }
     protected override void LoadComponent()
     {

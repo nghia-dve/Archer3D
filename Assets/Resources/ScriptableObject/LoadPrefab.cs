@@ -6,4 +6,5 @@ using UnityEngine;
 public class LoadPrefab : ScriptableObject
 {
     public GameObject model;
+    public Vector3 position;
 }

@@ -66,9 +66,6 @@ public class PlayerCtrl : NghiaMonoBehaviour
         loadGameObject(model, listWeapon, "Wand_R", 2);
         model = model.transform.parent.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
         loadGameObject(model, listSkin, "BackPack", 3);
-
-
-
     }
     private void loadGameObject(GameObject model, List<GameObject> gameObjects, string modelName, int n)
     {
