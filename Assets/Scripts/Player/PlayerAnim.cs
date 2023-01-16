@@ -25,6 +25,8 @@ public class PlayerAnim : NghiaMonoBehaviour
     private bool isExitState = true;
     public bool IsExitState { get { return isExitState; } }
 
+    private float runSpeed;
+
     const string animRun = "Run";
     const string animMove = "Move";
     const string animSingleTwohandSwordAttack = "Sword_L";
@@ -56,10 +58,16 @@ public class PlayerAnim : NghiaMonoBehaviour
 
     private void Run()
     {
+        if (Mathf.Abs(InputManager.Instance.Direction.magnitude) == 0 && runSpeed != 0)
+        {
+            animator.SetFloat(animMove, 0);
+            runSpeed = 0;
+        }
         if (isAttack || !isExitState) return;
         ChangeCurrentState(animRun);
         if (Mathf.Abs(InputManager.Instance.Direction.magnitude) == 0) return;
         animator.SetFloat(animMove, Mathf.Abs(InputManager.Instance.Direction.magnitude));
+        runSpeed = Mathf.Abs(InputManager.Instance.Direction.magnitude);
 
     }
     private void SingleTwohandSwordAttack()

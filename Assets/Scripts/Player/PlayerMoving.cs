@@ -14,6 +14,9 @@ public class PlayerMoving : NghiaMonoBehaviour
     private float moveSpeedPlayer = 3;
 
     [SerializeField]
+    private float rotationSpeed = 720;
+
+    [SerializeField]
     private PlayerCtrl playerCtrl;
 
     private void Update()
@@ -47,7 +50,9 @@ public class PlayerMoving : NghiaMonoBehaviour
 
     private void LookAtTaget()
     {
-        transform.parent.rotation = Quaternion.LookRotation(movingDir);
+        //transform.parent.rotation = Quaternion.LookRotation(movingDir);
+        Quaternion toRatation = Quaternion.LookRotation(movingDir, Vector3.up);
+        transform.parent.rotation = Quaternion.RotateTowards(transform.parent.rotation, toRatation, rotationSpeed * Time.deltaTime);
     }
 
     private void ClampPos()
