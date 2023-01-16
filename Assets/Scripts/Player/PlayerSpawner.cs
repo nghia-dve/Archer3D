@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class PlayerSpawner : Spawner
             return instance;
         }
     }
+    [SerializeField]
+    private CinemachineVirtualCamera camera;
+
     protected void Start()
     {
         PlayerSpawn();
@@ -22,8 +26,14 @@ public class PlayerSpawner : Spawner
     {
         GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;
-
+        camera.Follow = newGameObject.transform;
         // StartCoroutine(ResetAminator());
+    }
+
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        camera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
     }
 
 
