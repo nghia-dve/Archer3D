@@ -16,7 +16,7 @@ public class PlayerSpawner : Spawner
         }
     }
     [SerializeField]
-    private CinemachineVirtualCamera camera;
+    private new CinemachineFreeLook camera;
 
     protected void Start()
     {
@@ -27,13 +27,14 @@ public class PlayerSpawner : Spawner
         GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;
         camera.Follow = newGameObject.transform;
+        camera.LookAt = newGameObject.transform;
         // StartCoroutine(ResetAminator());
     }
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        camera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        camera = GameObject.Find("ThirdPersonCamera").GetComponent<CinemachineFreeLook>();
     }
 
 
