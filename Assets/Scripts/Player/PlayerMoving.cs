@@ -10,8 +10,11 @@ public class PlayerMoving : NghiaMonoBehaviour
 
     private float clampZ = 40f;
 
+    private bool isSetWalk = false;
+
     [SerializeField]
     private float moveSpeedPlayer = 3;
+    public float MoveSpeedPlayer { get { return moveSpeedPlayer; } }
 
     [SerializeField]
     private float rotationSpeed = 720;
@@ -44,6 +47,23 @@ public class PlayerMoving : NghiaMonoBehaviour
 
     private void Move()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeedPlayer = 10;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if (isSetWalk)
+                moveSpeedPlayer = 1;
+            else moveSpeedPlayer = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isSetWalk = !isSetWalk;
+            if (isSetWalk)
+                moveSpeedPlayer = 1;
+            else moveSpeedPlayer = 3;
+        }
         transform.parent.position += movingDir * moveSpeedPlayer * Time.deltaTime;
         ClampPos();
     }

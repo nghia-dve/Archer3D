@@ -23,6 +23,11 @@ public class GameCtrl : NghiaMonoBehaviour
     [SerializeField]
     private string wordPath;
 
+    [Header("camera")]
+    [SerializeField]
+    private Camera mainCamera;
+    public Camera MainCamera { get { return mainCamera; } }
+
     private bool isAttack;
     public bool IsAttack { get { return isAttack; } }
 
@@ -52,7 +57,11 @@ public class GameCtrl : NghiaMonoBehaviour
         playerPath = "Player";
         wordPath = "Word/Ground";
     }
-
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        mainCamera = Camera.main;
+    }
     public void Attack()
     {
         isAttack = true;

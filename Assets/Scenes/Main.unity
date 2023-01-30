@@ -1589,6 +1589,7 @@ MonoBehaviour:
   EnemyPath: Enemy
   playerPath: Player
   wordPath: Word/Ground
+  mainCamera: {fileID: 963194227}
 --- !u!4 &1847280718
 Transform:
   m_ObjectHideFlags: 0

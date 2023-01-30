@@ -66,7 +66,7 @@ public class PlayerAnim : NghiaMonoBehaviour
         if (isAttack || !isExitState) return;
         ChangeCurrentState(animRun);
         if (Mathf.Abs(InputManager.Instance.Direction.magnitude) == 0) return;
-        animator.SetFloat(animMove, Mathf.Abs(InputManager.Instance.Direction.magnitude));
+        animator.SetFloat(animMove, Mathf.Abs(playerCtrl.PlayerMoving.MoveSpeedPlayer * InputManager.Instance.Direction.magnitude));
         runSpeed = Mathf.Abs(InputManager.Instance.Direction.magnitude);
 
     }

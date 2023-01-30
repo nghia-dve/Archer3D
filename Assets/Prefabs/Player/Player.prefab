@@ -10828,6 +10828,7 @@ MonoBehaviour:
   - {fileID: 326923974704096391}
   - {fileID: 328456871190868313}
   playerAnim: {fileID: 3406388958134592085}
+  playerMoving: {fileID: 4520196210093993165}
 --- !u!114 &3406388958134592085
 MonoBehaviour:
   m_ObjectHideFlags: 0

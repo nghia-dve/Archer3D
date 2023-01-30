@@ -21,6 +21,10 @@ public class PlayerCtrl : NghiaMonoBehaviour
     private PlayerAnim playerAnim;
     public PlayerAnim PlayerAnim { get { return playerAnim; } }
 
+    [SerializeField]
+    private PlayerMoving playerMoving;
+    public PlayerMoving PlayerMoving { get { return playerMoving; } }
+
 
     #region Even animatoin
     protected void EvenRestCombo()
@@ -34,6 +38,7 @@ public class PlayerCtrl : NghiaMonoBehaviour
     {
         base.LoadComponent();
         playerAnim = GetComponent<PlayerAnim>();
+        playerMoving = transform.Find("PlayerMoving").GetComponent<PlayerMoving>();
     }
 
     protected override void ResetValue()

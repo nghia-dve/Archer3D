@@ -24,11 +24,37 @@ public class InputManager : NghiaMonoBehaviour
 
     private void GetDir()
     {
+        float verticalInput = 0;
+        float horizontalInput = 0;
+        Vector3 forward = GameCtrl.Instance.MainCamera.transform.forward;
+        Vector3 right = GameCtrl.Instance.MainCamera.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward = forward.normalized;
+        right = right.normalized;
 #if UNITY_ANDROID || UNITY_IPHONE
-        direction = new Vector3(UIManager.Instance.Joystick.Horizontal, 0, UIManager.Instance.Joystick.Vertical);
+        verticalInput = UIManager.Instance.Joystick.Vertical;
+        horizontalInput = UIManager.Instance.Joystick.Horizontal;
+        //if (verticalInput != 0 || horizontalInput != 0)
+        //{
+        //    Vector3 dirFwd = verticalInput * forward;
+        //    Vector3 dirRigth = horizontalInput * right;
+        //    direction = dirFwd + dirRigth;
+        //}
+        direction = verticalInput * forward + horizontalInput * right;
+        //direction = new Vector3(UIManager.Instance.Joystick.Horizontal, 0, UIManager.Instance.Joystick.Vertical);
 #endif
 #if UNITY_EDITOR
-        direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        //if (verticalInput != 0 || horizontalInput != 0)
+        //{
+        //    Vector3 dirFwd = verticalInput * forward;
+        //    Vector3 dirRigth = horizontalInput * right;
+        //    direction = dirFwd + dirRigth;
+        //}
+        direction = verticalInput * forward + horizontalInput * right;
+        //direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 #endif
     }
 
