@@ -19,9 +19,6 @@ public class PlayerAnim : NghiaMonoBehaviour
     protected bool isRun;
     public bool IsRun { get { return isRun; } }
 
-    private bool isAttack;
-    public bool IsAttack { get { return isAttack; } }
-
     private bool isExitState = true;
     public bool IsExitState { get { return isExitState; } }
 
@@ -33,23 +30,8 @@ public class PlayerAnim : NghiaMonoBehaviour
 
     private void Start()
     {
-        AddEvenButton();
-    }
 
-    // add even UI button down and up
-    private void AddEvenButton()
-    {
-        EventTrigger eventTrigger = UIManager.Instance.ButtonAttack.GetComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerDown;
-        entry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data); });
-        eventTrigger.triggers.Add(entry);
-        entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerUp;
-        entry.callback.AddListener((data) => { OnPointerUpDelegate((PointerEventData)data); });
-        eventTrigger.triggers.Add(entry);
     }
-
     private void Update()
     {
         Run();
@@ -63,7 +45,7 @@ public class PlayerAnim : NghiaMonoBehaviour
             animator.SetFloat(animMove, 0);
             runSpeed = 0;
         }
-        if (isAttack || !isExitState) return;
+        if (playerCtrl.PlayerAttack.IsAttack || !isExitState) return;
         ChangeCurrentState(animRun);
         if (Mathf.Abs(InputManager.Instance.Direction.magnitude) == 0) return;
         animator.SetFloat(animMove, Mathf.Abs(playerCtrl.PlayerMoving.MoveSpeedPlayer * InputManager.Instance.Direction.magnitude));
@@ -72,7 +54,7 @@ public class PlayerAnim : NghiaMonoBehaviour
     }
     private void SingleTwohandSwordAttack()
     {
-        if (!isAttack) return;
+        if (!playerCtrl.PlayerAttack.IsAttack) return;
         ChangeCurrentState(animSingleTwohandSwordAttack);
         isExitState = false;
     }
@@ -115,17 +97,10 @@ public class PlayerAnim : NghiaMonoBehaviour
     #region even anim
     private void State()
     {
-        if (isAttack) return;
+        if (playerCtrl.PlayerAttack.IsAttack) return;
         isExitState = true;
     }
     #endregion
-    private void OnPointerDownDelegate(PointerEventData data)
-    {
-        isAttack = true;
-    }
-    private void OnPointerUpDelegate(PointerEventData data)
-    {
-        isAttack = false;
-    }
+
 
 }

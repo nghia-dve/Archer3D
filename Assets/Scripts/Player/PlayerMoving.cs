@@ -25,17 +25,12 @@ public class PlayerMoving : NghiaMonoBehaviour
     private void Update()
     {
         GetTagetDir();
-        if (movingDir.magnitude <= 0.1f || playerCtrl.PlayerAnim.IsAttack || !playerCtrl.PlayerAnim.IsExitState) return;
+        if (movingDir.magnitude <= 0.1f || playerCtrl.PlayerAttack.IsAttack || !playerCtrl.PlayerAnim.IsExitState) return;
         Move();
         LookAtTaget();
 
     }
     private void FixedUpdate()
-    {
-
-    }
-
-    private void ResetPhysic()
     {
 
     }
@@ -53,16 +48,18 @@ public class PlayerMoving : NghiaMonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            if (isSetWalk)
-                moveSpeedPlayer = 1;
-            else moveSpeedPlayer = 3;
+            //if (isSetWalk)
+            //    moveSpeedPlayer = 1;
+            //else 
+            moveSpeedPlayer = 3;
         }
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isSetWalk = !isSetWalk;
             if (isSetWalk)
                 moveSpeedPlayer = 1;
-            else moveSpeedPlayer = 3;
+            else
+                moveSpeedPlayer = 3;
         }
         transform.parent.position += movingDir * moveSpeedPlayer * Time.deltaTime;
         ClampPos();

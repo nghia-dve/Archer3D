@@ -13,6 +13,10 @@ public class MouseLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetStatusMouse();
+    }
+    private void SetStatusMouse()
+    {
         if (Input.GetKey(KeyCode.LeftAlt))
         {
             if (Cursor.lockState == CursorLockMode.None) return;

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,8 +29,12 @@ public class GameCtrl : NghiaMonoBehaviour
     private Camera mainCamera;
     public Camera MainCamera { get { return mainCamera; } }
 
-    private bool isAttack;
-    public bool IsAttack { get { return isAttack; } }
+    [SerializeField]
+    private CinemachineFreeLook thirdPersonCamera;
+    public CinemachineFreeLook ThirdPersonCamera { get { return thirdPersonCamera; } }
+
+    //private bool isAttack;
+    //public bool IsAttack { get { return isAttack; } }
 
     private List<LoadPrefab> listPrefabs = new List<LoadPrefab>();
     public List<LoadPrefab> ListPrefabs { get { return listPrefabs; } }
@@ -61,14 +66,15 @@ public class GameCtrl : NghiaMonoBehaviour
     {
         base.LoadComponent();
         mainCamera = Camera.main;
+        thirdPersonCamera = GameObject.Find("ThirdPersonCamera").GetComponent<CinemachineFreeLook>();
     }
-    public void Attack()
-    {
-        isAttack = true;
-    }
+    //public void Attack()
+    //{
+    //    isAttack = true;
+    //}
 
-    public void NotAttack()
-    {
-        isAttack = false;
-    }
+    //public void NotAttack()
+    //{
+    //    isAttack = false;
+    //}
 }

@@ -32,7 +32,7 @@ public class InputManager : NghiaMonoBehaviour
         right.y = 0;
         forward = forward.normalized;
         right = right.normalized;
-#if UNITY_ANDROID || UNITY_IPHONE
+#if (UNITY_ANDROID || UNITY_IPHONE)&& !UNITY_EDITOR
         verticalInput = UIManager.Instance.Joystick.Vertical;
         horizontalInput = UIManager.Instance.Joystick.Horizontal;
         //if (verticalInput != 0 || horizontalInput != 0)
@@ -41,10 +41,9 @@ public class InputManager : NghiaMonoBehaviour
         //    Vector3 dirRigth = horizontalInput * right;
         //    direction = dirFwd + dirRigth;
         //}
-        direction = verticalInput * forward + horizontalInput * right;
         //direction = new Vector3(UIManager.Instance.Joystick.Horizontal, 0, UIManager.Instance.Joystick.Vertical);
-#endif
-#if UNITY_EDITOR
+        //Debug.Log("run android and IPhone");
+#elif UNITY_EDITOR 
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         //if (verticalInput != 0 || horizontalInput != 0)
@@ -53,9 +52,10 @@ public class InputManager : NghiaMonoBehaviour
         //    Vector3 dirRigth = horizontalInput * right;
         //    direction = dirFwd + dirRigth;
         //}
-        direction = verticalInput * forward + horizontalInput * right;
         //direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        // Debug.Log("run editor");
 #endif
+        direction = verticalInput * forward + horizontalInput * right;
     }
 
 }

@@ -27,7 +27,7 @@ public class PlayerSpawner : Spawner
         GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;
         camera.Follow = newGameObject.transform;
-        camera.LookAt = newGameObject.transform;
+        camera.LookAt = newGameObject.GetComponent<PlayerCtrl>().CameraLookAt.transform;
         // StartCoroutine(ResetAminator());
     }
 

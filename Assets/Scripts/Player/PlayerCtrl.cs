@@ -25,6 +25,14 @@ public class PlayerCtrl : NghiaMonoBehaviour
     private PlayerMoving playerMoving;
     public PlayerMoving PlayerMoving { get { return playerMoving; } }
 
+    [SerializeField]
+    private PlayerAttack playerAttack;
+    public PlayerAttack PlayerAttack { get { return playerAttack; } }
+
+    [SerializeField]
+    private GameObject cameraLookAt;
+    public GameObject CameraLookAt { get { return cameraLookAt; } }
+
 
     #region Even animatoin
     protected void EvenRestCombo()
@@ -39,6 +47,8 @@ public class PlayerCtrl : NghiaMonoBehaviour
         base.LoadComponent();
         playerAnim = GetComponent<PlayerAnim>();
         playerMoving = transform.Find("PlayerMoving").GetComponent<PlayerMoving>();
+        cameraLookAt = transform.Find("CameraLookAt").gameObject;
+        playerAttack = transform.Find("PlayerAttack").GetComponent<PlayerAttack>();
     }
 
     protected override void ResetValue()
