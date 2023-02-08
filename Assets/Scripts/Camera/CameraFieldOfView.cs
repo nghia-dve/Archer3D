@@ -20,11 +20,13 @@ public class CameraFieldOfView : MonoBehaviour
 
     private void SetFieldOfViewCamera()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && camera.m_Lens.FieldOfView > 3)
+        float Scroll = InputManager.Instance.ScrollView;
+
+        if (Scroll > 0 && camera.m_Lens.FieldOfView > 3)
         {
             camera.m_Lens.FieldOfView--;
         }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && camera.m_Lens.FieldOfView < 40)
+        if (Scroll < 0 && camera.m_Lens.FieldOfView < 40)
         {
             camera.m_Lens.FieldOfView++;
 

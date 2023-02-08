@@ -35,17 +35,9 @@ public class GameCtrl : NghiaMonoBehaviour
 
     //private bool isAttack;
     //public bool IsAttack { get { return isAttack; } }
-
+    [SerializeField]
     private List<LoadPrefab> listPrefabs = new List<LoadPrefab>();
     public List<LoadPrefab> ListPrefabs { get { return listPrefabs; } }
-
-    private void Awake()
-    {
-        listPrefabs.Clear();
-        GetListPrefabByName(listPrefabs, playerPath);
-        GetListPrefabByName(listPrefabs, EnemyPath);
-        GetListPrefabByName(listPrefabs, wordPath);
-    }
 
     protected virtual void GetListPrefabByName(List<LoadPrefab> listFrefab, string pathFrefab)
     {
@@ -61,6 +53,9 @@ public class GameCtrl : NghiaMonoBehaviour
         EnemyPath = "Enemy";
         playerPath = "Player";
         wordPath = "Word/Ground";
+        GetListPrefabByName(listPrefabs, playerPath);
+        GetListPrefabByName(listPrefabs, EnemyPath);
+        GetListPrefabByName(listPrefabs, wordPath);
     }
     protected override void LoadComponent()
     {

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,26 +8,13 @@ public class PlayerAttack : MonoBehaviour
     private bool isAttack;
     public bool IsAttack { get { return isAttack; } }
 
+#if (UNITY_ANDROID || UNITY_IOS)
     // Start is called before the first frame update
     void Start()
     {
-
-#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
         AddEvenButton();
         //Debug.Log("run android and IPhone");
-#endif
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-#if UNITY_EDITOR 
-        EvenMouse();
-        //Debug.Log("run editor");
-#endif
-    }
-
     // add even UI button down and up
     private void AddEvenButton()
     {
@@ -48,6 +35,17 @@ public class PlayerAttack : MonoBehaviour
     private void OnPointerUpDelegate(PointerEventData data)
     {
         isAttack = false;
+    }
+#endif
+
+    // Update is called once per frame
+    void Update()
+    {
+//Sử dụng công cụ này để biên dịch/thực thi mã cho bất kỳ nền tảng độc lập nào (Mac, Windows hoặc Linux).
+#if UNITY_STANDALONE
+        EvenMouse();
+       
+#endif
     }
 
     private void EvenMouse()

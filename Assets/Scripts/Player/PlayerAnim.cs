@@ -28,10 +28,6 @@ public class PlayerAnim : NghiaMonoBehaviour
     const string animMove = "Move";
     const string animSingleTwohandSwordAttack = "Sword_L";
 
-    private void Start()
-    {
-
-    }
     private void Update()
     {
         Run();

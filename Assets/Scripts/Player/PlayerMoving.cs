@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,10 +28,6 @@ public class PlayerMoving : NghiaMonoBehaviour
         if (movingDir.magnitude <= 0.1f || playerCtrl.PlayerAttack.IsAttack || !playerCtrl.PlayerAnim.IsExitState) return;
         Move();
         LookAtTaget();
-
-    }
-    private void FixedUpdate()
-    {
 
     }
 
@@ -81,5 +77,12 @@ public class PlayerMoving : NghiaMonoBehaviour
     {
         base.LoadComponent();
         playerCtrl = transform.parent.GetComponent<PlayerCtrl>();
+    }
+
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        moveSpeedPlayer = 3;
+        rotationSpeed = 720;
     }
 }

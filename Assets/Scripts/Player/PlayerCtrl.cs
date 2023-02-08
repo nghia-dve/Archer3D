@@ -33,15 +33,6 @@ public class PlayerCtrl : NghiaMonoBehaviour
     private GameObject cameraLookAt;
     public GameObject CameraLookAt { get { return cameraLookAt; } }
 
-
-    #region Even animatoin
-    protected void EvenRestCombo()
-    {
-        isRestCombo = !isRestCombo;
-
-    }
-    #endregion
-
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -89,5 +80,10 @@ public class PlayerCtrl : NghiaMonoBehaviour
         {
             gameObjects.Add(model.transform.Find(modelName + (i + 1)).gameObject);
         }
+    }
+
+    private void Start()
+    {
+        //Application.targetFrameRate = 30000;
     }
 }

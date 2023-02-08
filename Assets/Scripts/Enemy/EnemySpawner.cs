@@ -17,9 +17,9 @@ public class EnemySpawner : Spawner
 
     protected void Start()
     {
-        PlayerSpawn();
+        Spawn();
     }
-    private void PlayerSpawn()
+    private void Spawn()
     {
         GameObject newGameObject = Spawn(prefabName, pos, Quaternion.identity);
         newGameObject.transform.parent = transform.parent;

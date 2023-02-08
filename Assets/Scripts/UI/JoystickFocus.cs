@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
 
+
 public class JoystickFocus : NghiaMonoBehaviour
 {
     [SerializeField]
     private List<GameObject> listFocus = new List<GameObject>();
 
     private int currentState;
-
+#if (UNITY_ANDROID || UNITY_IOS)
     private void Update()
     {
-
         Focus();
     }
-
+#endif
     private void Focus()
     {
 
@@ -75,3 +75,4 @@ public class JoystickFocus : NghiaMonoBehaviour
         }
     }
 }
+
